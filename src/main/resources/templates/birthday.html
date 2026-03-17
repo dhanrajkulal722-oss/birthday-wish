@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    background: radial-gradient(circle, #2b0a0a, #000);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* 🎬 Title */
+h1 {
+    margin-top: 20px;
+    text-shadow: 0 0 10px red;
+}
+
+/* 📸 IMAGE */
+.image-box {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(255,0,100,0.7);
+}
+
+.image-box img {
+    width: 100%;
+    height: auto;
+}
+
+/* ❤️ Floating hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 18px;
+    animation: floatUp 6s linear infinite;
+    color: red;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity:1; }
+    100% { transform: translateY(-100vh); opacity:0; }
+}
+
+/* 🎶 Button */
+.music-btn {
+    margin-top: 20px;
+    padding: 14px 28px;
+    border-radius: 30px;
+    background: linear-gradient(45deg, red, pink);
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255,0,100,0.7);
+}
+
+/* 💌 Letter */
+.letter-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: purple;
+    color: white;
+    text-decoration: none;
+}
+
+/* ✨ Typing */
+#typing {
+    margin-top: 20px;
+    font-size: 22px;
+    color: #ff4d6d;
+    text-shadow: 0 0 10px red;
+}
+
+/* cursor */
+#typing::after {
+    content: "|";
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* 🎆 FIREWORK PARTICLES */
+.spark {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    to {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎉 Happy Birthday Gayatri ❤️ 🎉</h1>
+<p>Every moment with you feels like a beautiful memory 💖</p>
+
+<div class="image-box">
+    <img src="/image/Gemini_Generated_Image_i9qe8ri9qe8ri9qe.png">
+</div>
+
+<h3>- Your Dhanu ❤️</h3>
+
+<!-- 🎶 NEW BUTTON -->
+<button id="playBtn" class="music-btn" onclick="startSurprise()">
+    🎶 Tap to Feel the Surprise ❤️
+</button>
+
+<br>
+
+<a href="/letter" class="letter-btn">💌 Read My Letter</a>
+
+<audio id="bgmusic" loop>
+    <source src="/music/happy.mp3" type="audio/mpeg">
+</audio>
+
+<div id="typing"></div>
+
+<script>
+// 🎶 START EVERYTHING
+function startSurprise() {
+    document.getElementById("bgmusic").play();
+
+    // 🔥 start fireworks continuously
+    setInterval(() => {
+        burstFireworks();
+    }, 500);
+}
+
+// 🎆 FIREWORK FUNCTION
+function burstFireworks() {
+    for (let i = 0; i < 20; i++) {
+        let spark = document.createElement("div");
+        spark.className = "spark";
+
+        // random position
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+
+        spark.style.left = x + "px";
+        spark.style.top = y + "px";
+
+        // random movement
+        spark.style.setProperty("--x", (Math.random()*200 - 100) + "px");
+        spark.style.setProperty("--y", (Math.random()*200 - 100) + "px");
+
+        // random colors
+        spark.style.background = `hsl(${Math.random()*360}, 100%, 60%)`;
+
+        document.body.appendChild(spark);
+
+        setTimeout(() => spark.remove(), 1000);
+    }
+}
+
+// ❤️ floating hearts
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 400);
+
+// ✨ typing after 7 sec
+let text = "Once again Happy Birthday Baaale ❤️";
+let i = 0;
+
+function typingEffect() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typingEffect, 100);
+    }
+}
+
+setTimeout(typingEffect, 7000);
+</script>
+
+</body>
+</html>
